@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私は人間？</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="hero is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">私は人間ですか？</h1>
+                <div class="g-recaptcha" data-sitekey="6LebBnMqAAAAAEzRAxsTeB56sop_6xGR-6akS-Vk"></div>
+                <button id="submit" class="button is-primary" disabled>送信</button>
+                <div id="result" class="mt-4"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function onSubmit() {
+            // reCAPTCHAを確認した場合の処理
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerText = 'あなたは人間です！';
+        }
+
+        function recaptchaCallback() {
+            const submitButton = document.getElementById('submit');
+            submitButton.disabled = false;
+        }
+
+        document.getElementById('submit').addEventListener('click', function() {
+            if (grecaptcha.getResponse().length === 0) {
+                alert('reCAPTCHAを確認してください。');
+            } else {
+                onSubmit();
+            }
+        });
+    </script>
+</body>
+</html>
